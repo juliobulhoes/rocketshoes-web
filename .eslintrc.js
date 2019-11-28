@@ -36,6 +36,7 @@ module.exports = {
         ],
       },
     ],
+    'no-param-reassign': 'off',
     'no-console': ['error', { allow: ['tron'] }],
   },
 };
