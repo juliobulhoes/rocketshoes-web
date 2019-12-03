@@ -1,4 +1,5 @@
 import { call, put, all, takeLatest, select } from 'redux-saga/effects';
+import { css } from 'glamor';
 import { toast } from 'react-toastify';
 
 import api from '../../../services/api';
@@ -20,7 +21,19 @@ function* addToCart({ id }) {
   const amount = currentAmount + 1;
 
   if (amount > stockAmount) {
-    toast.error('Quantidade solicitada fora de estoque');
+    toast('Quantidade solicitada fora de estoque', {
+      className: css({
+        background: '#7159c1',
+      }),
+      bodyClassName: css({
+        fontSize: '18px',
+        color: '#eee',
+      }),
+      progressClassName: css({
+        background: '#eee',
+      }),
+      closeButton: false,
+    });
     return;
   }
 
@@ -47,7 +60,19 @@ function* updateAmount({ id, amount }) {
   const stockAmount = stock.data.amount;
 
   if (amount > stockAmount) {
-    toast.error('Quantidade solicitada fora de estoque');
+    toast('Quantidade solicitada fora de estoque', {
+      className: css({
+        background: '#7159c1',
+      }),
+      bodyClassName: css({
+        fontSize: '18px',
+        color: '#eee',
+      }),
+      progressClassName: css({
+        background: '#eee',
+      }),
+      closeButton: false,
+    });
     return;
   }
 
