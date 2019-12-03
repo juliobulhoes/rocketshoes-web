@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { darken } from 'polished';
 
@@ -66,5 +66,31 @@ export const ProductList = styled.ul`
         font-weight: bold;
       }
     }
+  }
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+`;
+
+export const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 42px;
+  font-weight: bold;
+
+  svg {
+    margin-top: 12px;
+    animation: ${rotate} 2s linear infinite;
   }
 `;

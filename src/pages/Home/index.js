@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { MdAddShoppingCart } from 'react-icons/md';
+import { MdAddShoppingCart, MdLoop } from 'react-icons/md';
 import { formatPrice } from '../../util/format';
 import api from '../../services/api';
 
 import * as CartActions from '../../store/modules/cart/actions';
 
-import { ProductList } from './sytles';
+import { ProductList, LoadingContainer } from './sytles';
 
 class Home extends Component {
   constructor(props) {
@@ -16,10 +16,12 @@ class Home extends Component {
 
     this.state = {
       products: [],
+      loading: false,
     };
   }
 
   async componentDidMount() {
+    this.setState({ loading: true });
     const response = await api.get('products');
 
     const data = response.data.map(product => ({
@@ -27,7 +29,7 @@ class Home extends Component {
       priceFormatted: formatPrice(product.price),
     }));
 
-    this.setState({ products: data });
+    this.setState({ products: data, loading: false });
   }
 
   handleAddProduct = id => {
@@ -37,8 +39,17 @@ class Home extends Component {
   };
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     const { amountInCart } = this.props;
+
+    if (loading) {
+      return (
+        <LoadingContainer>
+          Carregando a lista de produtos
+          <MdLoop size={60} color="#fff" />
+        </LoadingContainer>
+      );
+    }
 
     return (
       <ProductList>
