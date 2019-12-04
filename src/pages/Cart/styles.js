@@ -94,3 +94,44 @@ export const Total = styled.div`
     margin-left: 5px;
   }
 `;
+
+export const EmptyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 120px auto;
+  background: #fff;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    strong {
+      font-size: 32px;
+    }
+
+    svg {
+      margin-left: 8px;
+    }
+  }
+
+  button {
+    margin-top: 12px;
+    background: #7159c1;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.03, '#7159c1')};
+    }
+  }
+`;
