@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import {
   MdRemoveCircleOutline,
   MdAddCircleOutline,
@@ -99,13 +98,6 @@ function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
     </>
   );
 }
-
-Cart.propTypes = {
-  cart: PropTypes.arrayOf(PropTypes.objectOf()).isRequired,
-  removeFromCart: PropTypes.func.isRequired,
-  updateAmountRequest: PropTypes.func.isRequired,
-  total: PropTypes.string.isRequired,
-};
 
 const mapStateToProps = state => ({
   cart: state.cart.map(product => ({
