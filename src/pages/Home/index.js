@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { MdAddShoppingCart, MdLoop } from 'react-icons/md';
+import { MdAddShoppingCart } from 'react-icons/md';
 import { formatPrice } from '../../util/format';
 import api from '../../services/api';
 
 import * as CartActions from '../../store/modules/cart/actions';
 
-import { ProductList, LoadingContainer } from './sytles';
+import { ProductList, LoadingContainer, LoadingSvg } from './sytles';
 
 class Home extends Component {
   constructor(props) {
@@ -39,13 +39,13 @@ class Home extends Component {
 
   render() {
     const { products, loading } = this.state;
-    const { amountInCart } = this.props;
+    const { amountInCart, addingProducts } = this.props;
 
     if (loading) {
       return (
         <LoadingContainer>
           Carregando a lista de produtos
-          <MdLoop size={60} color="#fff" />
+          <LoadingSvg size={60} color="#fff" />
         </LoadingContainer>
       );
     }
@@ -63,7 +63,11 @@ class Home extends Component {
               onClick={() => this.handleAddProduct(product.id)}
             >
               <div>
-                <MdAddShoppingCart size={16} color="#fff" />{' '}
+                {addingProducts.includes(product.id) ? (
+                  <LoadingSvg size={16} color="#fff" />
+                ) : (
+                  <MdAddShoppingCart size={16} color="#fff" />
+                )}
                 {amountInCart[product.id] || 0}
               </div>
 
@@ -77,11 +81,12 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  amountInCart: state.cart.reduce((amount, product) => {
+  amountInCart: state.cart.products.reduce((amount, product) => {
     amount[product.id] = product.amount;
 
     return amount;
   }, {}),
+  addingProducts: state.cart.addingProducts,
 });
 
 const mapDispatchToProps = dispatch =>
