@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-
 import { darken } from 'polished';
+import { MdLoop } from 'react-icons/md';
 
 export const ProductList = styled.ul`
   display: grid;
@@ -78,6 +78,10 @@ const rotate = keyframes`
   }
 `;
 
+export const LoadingSvg = styled(MdLoop)`
+  animation: ${rotate} 2s linear infinite;
+`;
+
 export const LoadingContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,9 +92,4 @@ export const LoadingContainer = styled.div`
   color: #fff;
   font-size: 42px;
   font-weight: bold;
-
-  svg {
-    margin-top: 12px;
-    animation: ${rotate} 2s linear infinite;
-  }
 `;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { MdAddShoppingCart, MdLoop } from 'react-icons/md';
@@ -76,11 +75,6 @@ class Home extends Component {
     );
   }
 }
-
-Home.propTypes = {
-  addToCartRequest: PropTypes.func.isRequired,
-  amountInCart: PropTypes.objectOf(PropTypes.number).isRequired,
-};
 
 const mapStateToProps = state => ({
   amountInCart: state.cart.reduce((amount, product) => {
