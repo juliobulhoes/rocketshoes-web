@@ -61,6 +61,7 @@ class Home extends Component {
             <button
               type="button"
               onClick={() => this.handleAddProduct(product.id)}
+              disabled={addingProducts.includes(product.id)}
             >
               <div>
                 {addingProducts.includes(product.id) ? (

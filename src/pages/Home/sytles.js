@@ -79,7 +79,7 @@ const rotate = keyframes`
 `;
 
 export const LoadingSvg = styled(MdLoop)`
-  animation: ${rotate} 2s linear infinite;
+  animation: ${rotate} 1s linear infinite;
 `;
 
 export const LoadingContainer = styled.div`

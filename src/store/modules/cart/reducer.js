@@ -47,6 +47,16 @@ export default function cart(
       });
     }
 
+    case '@cart/UPDATE_AMOUNT_FAILURE': {
+      return produce(state, draft => {
+        const addingIndex = draft.addingProducts.indexOf(action.id);
+
+        if (addingIndex >= 0) {
+          draft.addingProducts.splice(addingIndex, 1);
+        }
+      });
+    }
+
     default:
       return state;
   }

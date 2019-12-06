@@ -6,7 +6,25 @@ import api from '../../../services/api';
 import history from '../../../services/history';
 import { formatPrice } from '../../../util/format';
 
-import { addToCartSuccess, updateAmountSuccess } from './actions';
+import {
+  addToCartSuccess,
+  updateAmountSuccess,
+  updateAmountFailure,
+} from './actions';
+
+const ToastStyle = {
+  className: css({
+    background: '#7159c1',
+  }),
+  bodyClassName: css({
+    fontSize: '18px',
+    color: '#eee',
+  }),
+  progressClassName: css({
+    background: '#eee',
+  }),
+  closeButton: false,
+};
 
 function* addToCart({ id }) {
   const productExists = yield select(state =>
@@ -21,19 +39,8 @@ function* addToCart({ id }) {
   const amount = currentAmount + 1;
 
   if (amount > stockAmount) {
-    toast('Quantidade solicitada fora de estoque', {
-      className: css({
-        background: '#7159c1',
-      }),
-      bodyClassName: css({
-        fontSize: '18px',
-        color: '#eee',
-      }),
-      progressClassName: css({
-        background: '#eee',
-      }),
-      closeButton: false,
-    });
+    toast('Quantidade solicitada fora de estoque', ToastStyle);
+    yield put(updateAmountFailure(id));
     return;
   }
 
@@ -60,19 +67,7 @@ function* updateAmount({ id, amount }) {
   const stockAmount = stock.data.amount;
 
   if (amount > stockAmount) {
-    toast('Quantidade solicitada fora de estoque', {
-      className: css({
-        background: '#7159c1',
-      }),
-      bodyClassName: css({
-        fontSize: '18px',
-        color: '#eee',
-      }),
-      progressClassName: css({
-        background: '#eee',
-      }),
-      closeButton: false,
-    });
+    toast('Quantidade solicitada fora de estoque', ToastStyle);
     return;
   }
 
