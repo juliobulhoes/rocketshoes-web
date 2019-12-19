@@ -1,4 +1,11 @@
-import { call, put, all, takeLatest, select } from 'redux-saga/effects';
+import {
+  call,
+  put,
+  all,
+  takeLatest,
+  select,
+  takeEvery,
+} from 'redux-saga/effects';
 import { css } from 'glamor';
 import { toast } from 'react-toastify';
 
@@ -75,6 +82,6 @@ function* updateAmount({ id, amount }) {
 }
 
 export default all([
-  takeLatest('@cart/ADD_REQUEST', addToCart),
+  takeEvery('@cart/ADD_REQUEST', addToCart),
   takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
 ]);
